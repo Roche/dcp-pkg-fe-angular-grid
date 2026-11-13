@@ -1,0 +1,29 @@
+<th>
+  <div class="flex justify-between items-center">
+    <span
+      (click)="toggleSortByColumn()"
+      [ngClass]="{'cursor-pointer': sortable}"
+    >
+      {{ column.label | translate}}
+    </span>
+    <span class="odcp-table_filter-wrapper">
+      <mat-icon *ngIf="sortDirection">
+        {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+      </mat-icon>
+
+      <odcp-header-cell-filter
+        *ngIf="filterable"
+        [advancedFilter]="advancedFilter"
+        [defaultOperator]="column?.defaultOperator ?? '='"
+        [isFiltered]="isFiltered"
+        [columnType]="column.type"
+        [columnKey]="column.key"
+        [filterSettings]="column.filterSettings"
+        [filterType]="column.filterType"
+        [gridService]="gridService"
+        (updateFilter)="updateFilter($event)"
+        (resetFilter)="resetFilter()"
+      ></odcp-header-cell-filter>
+    </span>
+  </div>
+</th>

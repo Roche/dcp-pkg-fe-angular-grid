@@ -1,0 +1,9 @@
+<div>
+  <ul style="padding-left: 0;" [formGroup]="form">
+    <li *ngFor="let data of (form.controls | keyvalue)">
+      <mat-checkbox color="primary" [formControlName]="data.key">
+        {{data.key | translate}}
+      </mat-checkbox>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,51 @@
+{
+  "name": "@open-dcp/angular-grid",
+  "version": "17.1.0",
+  "peerDependencies": {
+    "@angular/animations": "^17.0.0",
+    "@angular/cdk": "^17.3.0",
+    "@angular/material": "^17.3.0",
+    "@angular/core": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "@angular/common": "^17.0.0",
+    "@ngx-translate/core": ">=14.0.0 <16.0.0",
+    "@angular/forms": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "ngx-permissions": "^17.1.0",
+    "rxjs": "^7.8.2",
+    "@open-dcp/styles": ">=0.1.27",
+    "@open-dcp/angular-styles": ">=17.0.40",
+    "@open-dcp/angular-basic-components": ">=17.1.9",
+    "@open-dcp/angular-services": ">=17.3.1",
+    "@open-dcp/grid": ">=0.2.18",
+    "underscore": "^1.13.7",
+    "moment": "^2.29.4",
+    "@types/underscore": "^1.13.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/underscore": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "style-loader": "^4.0.0",
+    "css-loader": "^7.1.2",
+    "sass-loader": "^16.0.5",
+    "@open-dcp/styles": ">=0.1.27",
+    "@open-dcp/angular-styles": ">=17.0.40",
+    "@open-dcp/services": ">=1.2.0",
+    "@open-dcp/angular-services": ">=17.3.1",
+    "@open-dcp/grid": ">=0.2.18",
+    "@open-dcp/angular-basic-components": ">=17.1.9",
+    "@ngx-translate/core": "14.0.0",
+    "ngx-permissions": "^17.1.0",
+    "underscore": "^1.13.7",
+    "moment": "^2.29.4",
+    "@types/underscore": "^1.13.0",
+    "@angular/material": "^17.3.0"
+  },
+  "sideEffects": false
+}

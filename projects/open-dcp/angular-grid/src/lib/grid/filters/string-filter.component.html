@@ -1,0 +1,14 @@
+<div>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>{{'odcp.operator' | translate}}</mat-label>
+    <mat-select [(ngModel)]="operator" name="operatorSelect"> <mat-option *ngFor="let op of operators" [value]="op.value"> {{ op.label }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="showValueInput" appearance="fill" class="full-width">
+    <mat-label>{{'odcp.value' | translate}}</mat-label>
+    <input matInput [(ngModel)]="value" name="valueInput"> <button *ngIf="value" matSuffix mat-icon-button (click)="value = '';" aria-label="Clear">
+    <mat-icon>close</mat-icon>
+  </button>
+  </mat-form-field>
+</div>

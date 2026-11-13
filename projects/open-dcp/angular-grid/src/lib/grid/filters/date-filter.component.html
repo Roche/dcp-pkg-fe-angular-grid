@@ -1,0 +1,41 @@
+<div>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Operator</mat-label>
+    <mat-select [formControl]="operatorControl">
+      <mat-option *ngFor="let op of operators" [value]="op.value">
+        {{ op.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="showSingleInput()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>{{'odcp.date' | translate}}</mat-label>
+      <input matInput [matDatepicker]="singlePicker" [formControl]="singleDateControl">
+      <mat-datepicker-toggle matSuffix [for]="singlePicker"></mat-datepicker-toggle>
+      <mat-datepicker #singlePicker></mat-datepicker>
+      <button *ngIf="singleDateControl.value" matSuffix mat-icon-button (click)="singleDateControl.setValue(null)" aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="showRangeInput()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="rangeStartPicker" [formControl]="rangeStartControl">
+      <mat-datepicker-toggle matSuffix [for]="rangeStartPicker"></mat-datepicker-toggle>
+      <mat-datepicker #rangeStartPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width mt-2">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="rangeEndPicker" [formControl]="rangeEndControl">
+      <mat-datepicker-toggle matSuffix [for]="rangeEndPicker"></mat-datepicker-toggle>
+      <mat-datepicker #rangeEndPicker></mat-datepicker>
+      <button *ngIf="rangeStartControl.value || rangeEndControl.value" matSuffix mat-icon-button (click)="rangeStartControl.setValue(null); rangeEndControl.setValue(null)" aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>

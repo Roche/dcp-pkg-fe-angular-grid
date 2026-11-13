@@ -1,0 +1,93 @@
+<div>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>{{'odcp.operator' | translate}}</mat-label>
+    <mat-select [(ngModel)]="operatorValue" name="operatorSelect">
+      <mat-option *ngFor="let op of operators" [value]="op.value">
+        {{ op.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="showSingleInput" class="flex gap-2">
+    <mat-form-field appearance="fill" class="flex-grow">
+      <mat-label>{{'odcp.date' | translate}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="date" name="singleDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <button *ngIf="date" matSuffix mat-icon-button (click)="date = null" aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="flex-grow">
+      <mat-label>{{'odcp.time' | translate}}</mat-label>
+      <input matInput [(ngModel)]="time" name="singleTime" readonly [matMenuTriggerFor]="timeMenu" #menuTimeTrigger="matMenuTrigger">
+      <button *ngIf="time" matSuffix mat-icon-button (click)="time = null" aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-menu #timeMenu="matMenu" class="time-picker-menu">
+        <div style="padding: 16px;">
+          <input matInput type="time" [(ngModel)]="time" (change)="onTimeSelected(time, 'single')" style="width: 100%;">
+          <p class="text-sm text-muted">Format: HH:MM (24hr)</p>
+          <button mat-button (click)="menuTimeTrigger.closeMenu()">Close</button>
+        </div>
+      </mat-menu>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="showRangeInput">
+    <div class="flex gap-2">
+      <mat-form-field appearance="fill" class="flex-grow">
+        <mat-label>{{'odcp.startDate' | translate}}</mat-label>
+        <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="rangeStartDate" name="rangeStartDate">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+        <button *ngIf="rangeStartDate" matSuffix mat-icon-button (click)="rangeStartDate = null" aria-label="Clear">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-grow">
+        <mat-label>{{'odcp.startTime' | translate}}</mat-label>
+        <input matInput [(ngModel)]="rangeStartTime" name="rangeStartTime" readonly [matMenuTriggerFor]="startTimeMenu" #menuStartTimeTrigger="matMenuTrigger">
+        <button *ngIf="rangeStartTime" matSuffix mat-icon-button (click)="rangeStartTime = null" aria-label="Clear">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-menu #startTimeMenu="matMenu" class="time-picker-menu">
+          <div style="padding: 16px;">
+            <input matInput type="time" [(ngModel)]="rangeStartTime" (change)="onTimeSelected(rangeStartTime, 'start')" style="width: 100%;">
+            <p class="text-sm text-muted">{{'odcp.timeFormat24' | translate}}</p>
+            <button mat-button (click)="menuStartTimeTrigger.closeMenu()">Close</button>
+          </div>
+        </mat-menu>
+      </mat-form-field>
+    </div>
+
+    <div class="flex gap-2">
+      <mat-form-field appearance="fill" class="flex-grow">
+        <mat-label>{{'odcp.endDate' | translate}}</mat-label>
+        <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="rangeEndDate" name="rangeEndDate">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+        <button *ngIf="rangeEndDate" matSuffix mat-icon-button (click)="rangeEndDate = null" aria-label="Clear">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-grow">
+        <mat-label>{{'odcp.endTime' | translate}}</mat-label>
+        <input matInput [(ngModel)]="rangeEndTime" name="rangeEndTime" readonly [matMenuTriggerFor]="endTimeMenu" #menuEndTimeTrigger="matMenuTrigger">
+        <button *ngIf="rangeEndTime" matSuffix mat-icon-button (click)="rangeEndTime = null" aria-label="Clear">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-menu #endTimeMenu="matMenu" class="time-picker-menu">
+          <div style="padding: 16px;">
+            <input matInput type="time" [(ngModel)]="rangeEndTime" (change)="onTimeSelected(rangeEndTime, 'end')" style="width: 100%;">
+            <p class="text-sm text-muted">{{'odcp.timeFormat24' | translate}}</p>
+            <button mat-button (click)="menuEndTimeTrigger.closeMenu()">Close</button>
+          </div>
+        </mat-menu>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

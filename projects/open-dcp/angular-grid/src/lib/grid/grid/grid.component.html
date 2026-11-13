@@ -1,0 +1,74 @@
+<div class="dcp-table-container" #tableContainer [ngStyle]="computedStyle()">
+  <div *ngIf="downloadCsv" class="dcp-table-header">
+    <button mat-icon-button class="dcp-download-button"
+      (click)="handleDownloadCsv()" aria-label="Download CSV">
+      <mat-icon>download</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="globalSearch">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>{{'odcp.search' | translate}}</mat-label>
+      <input matInput #globalSearchInput (input)="onGlobalSearchInput($event)">
+      <button matSuffix mat-icon-button type="button" aria-label="Clear filter"
+              *ngIf="searchQuery.length > 0" (click)="clearGlobalSearch(globalSearchInput)" class="clear-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <table>
+    <colgroup>
+      <col *ngIf="selectable" style="width: 5%">
+      <!-- Set the width of each column based on the column configuration
+       If column doesn't have width use 100% instead of auto, because it cause bug
+       and the column can dissapear on first load after cache clearing -->
+      <col *ngFor="let column of columns" [style.width]="column.width ? column.width : '100%'">
+    </colgroup>
+    <thead [style]="stickyHeaderStyle()">
+    <tr>
+      <th *ngIf="selectable">
+        <mat-checkbox
+          [indeterminate]="someSelected()"
+          [checked]="allSelected()"
+          (change)="toggleSelectAll()"
+        ></mat-checkbox>
+      </th>
+      <ng-container *ngIf="true; else customHeaderSlot">
+        <odcp-header-cell
+          *ngFor="let column of columns"
+          [gridService]="gridService"
+          [column]="column"
+          [isFiltered]="gridService.hasFilter(column.key)"
+          [sortable]="sortable && !column.notSortable"
+          [sortDirection]="gridService.getSortCondition(column.key)?.direction"
+          [filterable]="filterable && !column.notFilterable"
+          [advancedFilter]="advancedFilter"
+        ></odcp-header-cell>
+      </ng-container>
+      <ng-template #customHeaderSlot>
+      </ng-template>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="firstRow" [style.height.px]="firstRowHeight">
+      <td colspan="100%"></td>
+    </tr>
+    <tr *ngFor="let row of renderRows" [attr.data-global-id]="row.globaIndex">
+      <td *ngIf="selectable">
+        <mat-checkbox
+          [checked]="selectedIndexes.has(row.globaIndex)"
+          (change)="toggleSelection(row.globaIndex)"
+        ></mat-checkbox>
+      </td>
+      <odcp-body-cell
+        *ngFor="let column of columns"
+        [row]="row.data"
+        [column]="column"
+        [specialDisplayValues]="specialDisplayValues"
+      ></odcp-body-cell>
+    </tr>
+    <tr class="lastRow" [style.height.px]="lastRowHeight">
+      <td colspan="100%"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

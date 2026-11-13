@@ -1,0 +1,32 @@
+<div>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>{{'odcp.operator' | translate}}</mat-label>
+    <mat-select [(ngModel)]="operator" name="operatorSelect">
+      <mat-option *ngFor="let op of operators" [value]="op.value">
+        {{ op.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="showValueInput" class="flex gap-2 items-end">
+    <mat-form-field appearance="fill" class="flex-grow">
+      <mat-label>{{'odcp.duration' | translate}}</mat-label>
+      <input matInput [(ngModel)]="duration" name="durationInput"
+             placeholder="00:00:00"
+             [pattern]="'^(\\d{1,2}):([0-5]?\\d):([0-5]?\\d)$'"
+             (input)="duration = $event.target.value; applyFilterEmitter.emit()"
+             #durationField="ngModel"
+             [class.is-invalid]="durationField.invalid && durationField.touched && durationField.dirty">
+      <mat-error *ngIf="durationField.invalid && durationField.touched && durationField.dirty">
+        {{'odcp.grid.filter.errors.invalidDurationFormat' | translate}}
+      </mat-error>
+      <button *ngIf="duration" matSuffix mat-icon-button (click)="duration = ''; applyFilterEmitter.emit();" aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <span *ngIf="isValidDuration && duration" class="ml-2 text-xs text-gray-500">
+      ({{ durationInSeconds }} s)
+    </span>
+  </div>
+</div>
