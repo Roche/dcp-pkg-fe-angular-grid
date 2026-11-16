@@ -39,4 +39,4 @@ jobs:
         run: |
           # Remove any static auth token line injected by setup-node into .npmrc
           sed -i '/_authToken/d' /home/runner/work/_temp/.npmrc 2>/dev/null || true
-          npm publish --provenance --access public
+          npm publish ./dist/open-dcp/angular-grid --provenance --access public
